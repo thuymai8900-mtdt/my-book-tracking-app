@@ -1,5 +1,5 @@
 import React from "react";
-import * as BooksAPI from "../BooksAPI";
+import PropTypes from 'prop-types'
 
 const Book = props => {
   const {
@@ -7,26 +7,9 @@ const Book = props => {
     authors,
     imageUrl,
     book,
-    setBooks,
-    isSearching,
-    bookshelf
+    bookshelf,
+    handleShelf
   } = props;
-
-  const handleShelfChange = event => {
-    if (event.target.value !== "move") {
-      BooksAPI.update(book, event.target.value).then(response =>
-        BooksAPI.getAll().then(newBooks => {
-          setBooks(newBooks);
-        })
-      );
-    }
-  };
-
-  const handleShelfChangeInSearch = event => {
-    if (event.target.value !== "move") {
-      BooksAPI.update(book, event.target.value);
-    }
-  };
 
   return (
     <div className="book">
@@ -41,13 +24,7 @@ const Book = props => {
         ></div>
         <div className="book-shelf-changer">
           <select
-            onChange={event => {
-              if (!isSearching) {
-                handleShelfChange(event);
-              } else {
-                handleShelfChangeInSearch(event);
-              }
-            }}
+            onChange={event => {handleShelf(book, event);}}
             value={bookshelf}
           >
             <option value="move" disabled>
@@ -66,6 +43,15 @@ const Book = props => {
       </div>
     </div>
   );
+};
+
+Book.propTypes = {
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.array.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  bookshelf: PropTypes.string.isRequired,
+  book: PropTypes.object.isRequired,
+  handleShelf: PropTypes.func.isRequired,
 };
 
 export default Book;

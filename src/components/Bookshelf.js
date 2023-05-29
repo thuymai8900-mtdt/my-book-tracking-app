@@ -1,9 +1,20 @@
 import React from "react";
 import Book from "./Book";
+import * as BooksAPI from "../BooksAPI";
 import WoodenShelfImage from "../icons/207-2075695_wooden-shelf-png.png";
+import PropTypes from 'prop-types'
 
 const Bookshelf = props => {
-  const { books, title, setBooks } = props;
+  const { books, title, setBooks, allBook } = props;
+
+  const handleShelf = (book, event) => {
+    if (event.target.value !== "move") {
+      book.shelf = event.target.value;
+      BooksAPI.update(book, event.target.value).then(() => {
+        setBooks([...allBook.filter((b) => b.id !== book.id), book]);
+      });
+    }
+  }
 
   return (
     <div className="bookshelf">
@@ -19,7 +30,7 @@ const Bookshelf = props => {
                   imageUrl={book.imageLinks && book.imageLinks.thumbnail}
                   bookshelf={book.shelf}
                   book={book}
-                  setBooks={setBooks}
+                  handleShelf={handleShelf}
                 />
               </li>
             ))}
@@ -32,6 +43,13 @@ const Bookshelf = props => {
       </div>
     </div>
   );
+};
+
+Bookshelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  allBook: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  setBooks: PropTypes.func.isRequired
 };
 
 export default Bookshelf;

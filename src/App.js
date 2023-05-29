@@ -7,7 +7,7 @@ import Bookshelf from "./components/Bookshelf";
 import { useHistory } from "react-router-dom";
 
 const bookshelves = [
-  { title: "My reeding", shelfName: "currentlyReading" },
+  { title: "My reading", shelfName: "currentlyReading" },
   { title: "Yêu thích", shelfName: "wantToRead" },
   { title: "Read", shelfName: "read" }
 ];
@@ -40,6 +40,7 @@ const App = () => {
                     book => book && book.shelf === bookshelf.shelfName
                   )
                 }
+                allBook={books}
                 setBooks={setBooks}
               />
             ))}
