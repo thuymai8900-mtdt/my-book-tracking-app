@@ -48,12 +48,12 @@ const Book = props => {
                 handleShelfChangeInSearch(event);
               }
             }}
-            defaultValue={bookshelf}
+            value={bookshelf}
           >
             <option value="move" disabled>
               Move to...
             </option>
-            <option value="myReading">My Reading</option>
+            <option value="currentlyReading">My Reading</option>
             <option value="wantToRead">Yêu thích</option>
             <option value="read">Read</option>
             <option value="none">None</option>

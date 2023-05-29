@@ -7,7 +7,7 @@ import Bookshelf from "./components/Bookshelf";
 import { useHistory } from "react-router-dom";
 
 const bookshelves = [
-  { title: "My reeding", shelfName: "myReading" },
+  { title: "My reeding", shelfName: "currentlyReading" },
   { title: "Yêu thích", shelfName: "wantToRead" },
   { title: "Read", shelfName: "read" }
 ];
